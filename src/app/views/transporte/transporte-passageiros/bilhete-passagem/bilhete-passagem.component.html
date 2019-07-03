@@ -1,0 +1,183 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-head-line">TRANSPORTE / PASSAGEIROS</h1>
+     
+
+    </div>
+</div>
+
+    <!--<div id="print" class="conteudo">-->
+    <p-tabView (onChange)="onTabChange($event)">
+       <p-tabPanel header="Bilhete de passagem - Impressão" [selected]="true">   
+
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12">
+                    <div class="ui-g-1">
+                        <label for="prefixo" style="color: blue">Prefixo</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="prefixo"
+                            [(ngModel)]="prefixo" />
+                    </div>
+                    <div class="ui-g-2">
+                        <label for="linha" style="color: blue">Linha</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="linha"
+                            [(ngModel)]="linha" />
+                    </div>
+                    <div class="ui-g-4">
+                        <label for="secao_de" style="color: blue">Seção: Origem</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="secao_de"
+                            [(ngModel)]="secao_de" />
+                    </div>
+                    <div class="ui-g-4">
+                        <label for="secao_para" style="color: blue">Destino</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="secao_para"
+                            [(ngModel)]="secao_para" />
+                    </div>
+                    <div class="ui-g-1">
+                        <label style="color: white">.</label><br>
+                        <button type="button" (click)="show()" pButton icon="pi pi-search"></button>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="ui-g-12">
+                    <div class="ui-g-3">
+                        <label for="data_embarque">Data embarque</label>
+                        <input pInputText id="data_embarque" [(ngModel)]="data_embarque" disabled="true" />
+                    </div>
+                    <div class="ui-g-2">
+                        <label for="horario">Horário</label>
+                        <input pInputText id="horario" [(ngModel)]="horario" disabled="true" />
+                    </div>
+                    <div class="ui-g-1">
+                        <label for="poltrona">Poltrona</label>
+                        <input pInputText id="poltrona" [(ngModel)]="poltrona" disabled="true" />
+                    </div>
+                    <div class="ui-g-2">
+                        <label for="">Dia da semana</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                    <div class="ui-g-2">
+                        <label for="">Box</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                    <div class="ui-g-1">
+                        <label for="">C.S.</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                </div>
+
+
+
+                <div class="ui-g-12">
+                    <div class="ui-g-2">
+                        <label for="data_emissao">Data emissão</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="data_emissao"
+                            [(ngModel)]="data_emissao" />
+                    </div>
+                    <div class="ui-g-2">
+                        <label for="hora_emissao">Hora emissão</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="hora_emissao"
+                            [(ngModel)]="hora_emissao" />
+                    </div>
+
+                    <div class="ui-g-4">
+                        <label for="">Agência</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                    <div class="ui-g-3">
+                        <label for="">Agente</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="ui-g-12">
+
+                    <div class="ui-g-3">
+                        <label for="">Serviço</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                    <div class="ui-g-2">
+                        <label for="tarifa">Tarifa</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">R$</span>
+                            <input currencyMask [(ngModel)]="tarifa"
+                                [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
+                        </div>
+
+                    </div>
+
+                    <div class="ui-g-2">
+
+                    </div>
+
+                    <div class="ui-g-2">
+                        <label for="">Outros</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                    <div class="ui-g-2">
+                        <label for="">Pedágio</label>
+                        <input pInputText disabled="true" />
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="ui-g-12">
+
+                    <div class="ui-g-8">
+                        <label for="">Bilhete de Passagem Rodoviário</label>
+                        <input pInputText disabled="true" />
+                    </div>
+                    <div class="ui-g-3">
+                        <label for="total">Total</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">R$</span>
+                            <input currencyMask [(ngModel)]="total"
+                                [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+           
+           
+
+
+            <hr>
+
+            <p-footer >
+                   
+                <div class="ui-dialog-buttonpane ui-helper-clearfix">  
+               <!-- <button pButton type="button" icon="pi pi-check" label="Enviar" class="ui-button-info"
+                    style="margin-right: .25em"></button>-->
+                    <div class="header-right">
+                    <button pButton type="button" (click)="imprimir()" icon="pi pi-times" label="Imprimir"
+                        class="ui-button-danger"></button>
+                    </div>
+                </div>
+            </p-footer>
+
+        </p-tabPanel>
+        <p-tabPanel header="Faturamento passagem" [disabled]="true">
+           ...
+       </p-tabPanel>
+
+     
+    </p-tabView>
+
+    
+
+
+
+
+

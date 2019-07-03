@@ -1,0 +1,33 @@
+<p-table #dt [columns]="cols" [value]="localidades" [paginator]="true" [rows]="5" [responsive]="true">
+
+    <ng-template pTemplate="caption">
+               
+                 <div style="text-align: right">        
+                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                     <input type="text" pInputText size="50" placeholder="Pesquisa" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                 </div>
+             </ng-template>
+
+
+ <ng-template pTemplate="header">
+     <tr>
+         <th pSortableColumn="nome">Localidade/Bairro <p-sortIcon field="nome"></p-sortIcon></th>
+         <th pSortableColumn="tipo">Tipo <p-sortIcon field="tipo"></p-sortIcon></th>           
+         <th pSortableColumn="cidade">Cidade <p-sortIcon field="cidade_id.nome"></p-sortIcon></th>           
+         <th pSortableColumn="estado">Estado <p-sortIcon field="estado_id.estado.id.sigla"></p-sortIcon></th>           
+         <th style="width:4em"></th>
+     </tr>
+ </ng-template>
+ <ng-template pTemplate="body" let-localidade>
+     <tr>
+         <td><span class="ui-column-title">Localidade/Bairro</span>{{localidade.nome}}</td>
+         <td><span class="ui-column-title">Tipo</span>{{localidade.tipo}}</td>
+         <td><span class="ui-column-title">Cidade</span>{{localidade.cidade_id.nome}}</td>
+         <td><span class="ui-column-title">Estado</span>{{localidade.cidade_id.estado_id.sigla}}</td>
+        
+         <td>
+             <button pButton icon="pi pi-check" (click)="selectLocalidade(localidade)"></button>
+         </td>
+     </tr>
+ </ng-template>
+</p-table>

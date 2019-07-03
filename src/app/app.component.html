@@ -1,0 +1,30 @@
+
+    <div id="wrapper">   
+         <!-- /. NAV TOP  -->  
+        <app-menu [hidden]="!showTemplate"></app-menu>
+       
+        
+        <!-- /. NAV SIDE  -->
+        <app-sidebar [hidden]="!showTemplate"></app-sidebar>
+
+
+         <!-- /. WRAPPER /CONTENT  -->
+         <!-- <div [ngClass]="showContentWrapper()">      -->   
+            <div id="page-wrapper"> 
+           
+                <div id="page-inner">
+                    <router-outlet></router-outlet>            
+                </div>          
+            </div>
+       <!--</div>  -->
+        
+    
+    
+   
+
+    <div id="footer-sec" [hidden]="!showTemplate">
+       Desenvolvido por : <a href="http://www.knopsistemas.com.br/" target="_blank">Knop Sistemas</a>
+    </div>
+
+e
+

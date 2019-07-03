@@ -1,0 +1,151 @@
+<div class="row">
+        <div class="col-md-12">
+            <h1 class="page-head-line">TRANSPORTE / PASSAGEIROS</h1>
+</div>
+
+<p-tabView (onChange)="onTabChange($event)">
+    <p-tabPanel header="Seções" [selected]="true">
+
+        <p-table #dt [columns]="cols" [value]="secoes" selectionMode="single" [(selection)]="selectedSecao"
+            (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+            <ng-template pTemplate="caption">
+
+                <div style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Pesquisa"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+
+
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                    <td>
+                        {{rowData["linha_id"]["nome"]}}
+                    </td>
+                    <td>
+                        {{rowData["localidade1_id"]["nome"]}}
+                    </td>
+                    <td>
+                        {{rowData["localidade2_id"]["nome"]}}
+                    </td>
+                    <td>
+
+
+                        {{rowData["tarifa"].toFixed(2)}}
+                    </td>
+                </tr>
+            </ng-template>
+
+
+
+
+            <ng-template pTemplate="summary" let-rowData>
+                <div style="text-align:left">
+                    <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Novo"></button>
+                </div>
+            </ng-template>
+        </p-table>
+
+        <p-dialog header="Secao" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+
+            <div class="ui-g ui-fluid" *ngIf="secao">
+
+                <div class="ui-g-12">
+                    <div class="ui-g-2">
+                        <label for="prefixo" style="color: blue">Prefixo/Código</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="linha_id"
+                            [(ngModel)]="secao.linha_id.prefixo" />
+                    </div>
+                    <div class="ui-g-9">
+                        <label for="linha_id" style="color: blue">Linha</label>
+                        <input pInputText style="background-color:#E8E8E8" readonly="true" id="linha_id"
+                            [(ngModel)]="secao.linha_id.nome" />
+
+                    </div>
+                    <div class="ui-g-1">
+                        <label style="color: white">.</label><br>
+                        <button type="button" (click)="showLinha()" pButton icon="pi pi-search"></button>
+                    </div>
+                </div>
+
+
+
+
+                <div class="ui-g-12">
+                    <div class="ui-g-5">
+                        <label for="prefixo" style="color: blue">Origem</label>
+                        <input pInputText style="background-color: #E8E8E8" readonly="true" id="localidade1_id"
+                            [(ngModel)]="secao.localidade1_id.nome" />
+                    </div>
+                    <div class="ui-g-1">
+                        <label style="color: white">.</label><br>
+                        <button type="button" (click)="showLocalidade1()" pButton icon="pi pi-search"></button>
+                    </div>
+
+                    <div class="ui-g-5">
+                        <label for="prefixo" style="color: blue">Destino</label>
+                        <input pInputText style="background-color: #E8E8E8" readonly="true" id="localidade2_id"
+                            [(ngModel)]="secao.localidade2_id.nome" />
+                    </div>
+                    <div class="ui-g-1">
+                        <label style="color: white">.</label><br>
+                        <button type="button" (click)="showLocalidade2()" pButton icon="pi pi-search"></button>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="ui-g-12">
+                    <div class="ui-g-2">
+                        <label for="tarifa">Tarifa</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">R$</span>
+                            <input currencyMask [(ngModel)]="secao.tarifa"
+                                [options]="{ prefix: '', thousands: '.', decimal: ',' }" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="ui-g-12">
+                    <div class="ui-g-12">
+                        <label for="informacoes">Informações</label>
+                        <input pInputText id="informacoes" [(ngModel)]="secao.informacoes" />
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                    <button type="button" pButton icon="fa fa-check" class="ui-button-info" (click)="save()"
+                        label="Salvar"></button>
+                    <button type="button" pButton icon="fa fa-close" class="ui-button-danger" (click)="delete()"
+                        label="Excluir"></button>
+
+
+                </div>
+            </p-footer>
+
+        </p-dialog>
+    </p-tabPanel>
+    <p-tabPanel header="Cadastro" [disabled]="true">
+        Cadastro de localidades/bairros
+    </p-tabPanel>
+</p-tabView>

@@ -1,0 +1,122 @@
+<div class="row">
+        <div class="col-md-12">
+            <h1 class="page-head-line">TRANSPORTE / PASSAGEIROS</h1>
+        
+    
+</div>
+
+<p-tabView (onChange)="onTabChange($event)">
+  <p-tabPanel header="Localidades" [selected]="true">   
+  
+       <p-table #dt [columns]="cols" [value]="localidades" selectionMode="single" [(selection)]="selectedLocalidade" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
+           <ng-template pTemplate="caption">
+            
+               <div style="text-align: right">        
+                   <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                   <input type="text" pInputText size="50" placeholder="Pesquisa" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+               </div>
+           </ng-template>
+           <ng-template pTemplate="header" let-columns>
+               <tr>
+                   <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                       {{col.header}}
+                       <p-sortIcon [field]="col.field"></p-sortIcon>
+                   </th>
+               </tr>
+           </ng-template>
+
+
+           <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                    <td>
+                        {{rowData["nome"]}}
+                    </td>
+                    <td>
+                        {{rowData["tipo"]}}
+                    </td>
+                    <td>
+                        {{rowData["cidade_id"]["nome"]}}
+                    </td>
+                    <td>
+                        {{rowData["cidade_id"]["estado_id"]["nome"]}}
+                    </td>
+                </tr>
+            </ng-template>
+          
+
+
+
+           <ng-template pTemplate="summary" let-rowData>
+               <div style="text-align:left">
+                   <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Novo"></button>
+               </div>
+           </ng-template>    
+       </p-table>
+
+       <p-dialog header="Localidade" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" >
+        
+           <div class="ui-g ui-fluid" *ngIf="localidade">
+           
+
+               <div class="ui-g-12">
+                  <div class="ui-g-12">
+                          <label for="nome" style="color: red">Nome da localidade/bairro</label>                 
+                          <input pInputText id="nome" [(ngModel)]="localidade.nome" />
+                  </div>    
+                   <div class="ui-g-8">
+                        <label for="Tipo" style="color: red">Tipo</label>
+                         <p-dropdown [options]="tipos" [(ngModel)]="localidade.tipo" placeholder="Selecione um tipo" [showClear]="true"></p-dropdown>
+                    </div>               
+                 
+               </div>       
+
+                <div class="ui-g-12">
+                    
+                    <div class="ui-g-6">
+                        <label for="cidade_id" style="color: blue">Cidade</label>
+                        <input pInputText  disabled="true" id="cidade_id" [(ngModel)]="localidade.cidade_id.nome" />         
+                    
+                    </div>
+                    <div class="ui-g-5">
+                        <label for="cidade_id" style="color: blue">Estado</label>
+                        <input pInputText  disabled="true" id="estado_id" [(ngModel)]="localidade.cidade_id.estado_id.sigla" />         
+                    
+                    </div>
+                    <div class="ui-g-1">
+                        <label style="color: white">.</label><br>
+                        <button type="button" (click)="show()" pButton icon="pi pi-search"></button>
+                    </div>
+                </div>
+
+
+
+             
+              
+
+                <div class="ui-g-12">
+                    <div class="ui-g-12">
+                        <label for="informacoes">Informações</label>                
+                        <input pInputText id="informacoes" [(ngModel)]="localidade.informacoes" />
+                    </div>
+                </div>       
+
+             
+
+
+
+           </div>
+           <p-footer>
+               <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                    <button type="button" pButton icon="fa fa-check" class="ui-button-info" (click)="save()" label="Salvar"></button>
+                   <button type="button" pButton icon="fa fa-close" class="ui-button-danger" (click)="delete()" label="Excluir"></button>
+
+
+               </div>
+           </p-footer>
+       
+       </p-dialog>
+   </p-tabPanel>
+    <p-tabPanel header="Cadastro" [disabled]="true">
+        Cadastro de localidades/bairros
+   </p-tabPanel>
+</p-tabView>   
