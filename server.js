@@ -8,7 +8,8 @@ app.use(express.static(__dirname + '/dist/KNOP-UI'));
 
 app.get('/*', function(req,res) {
     
-res.sendFile(path.join(__dirname+'/dist/KNOP-UI/index.html'));
+//res.sendFile(path.join(__dirname+'/dist/KNOP-UI/index.html'));
+res.sendFile(path.join(__dirname+'/dist/KNOP-UI/'));
 });
 
 // Inicia a aplicação pela porta configurada
