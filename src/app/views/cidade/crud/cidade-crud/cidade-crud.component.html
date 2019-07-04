@@ -1,4 +1,4 @@
-<p-tabView (onChange)="onTabChange($event)">
+<p-tabView >
     <p-tabPanel header="Cidades" [selected]="true">           
         <p-table #dt [columns]="cols" [value]="cidades" selectionMode="single" [(selection)]="selectedCidade" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
         <ng-template pTemplate="caption">      

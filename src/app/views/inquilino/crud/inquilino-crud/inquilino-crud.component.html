@@ -1,5 +1,5 @@
-<p-tabView (onChange)="onTabChange($event)">
-    <p-tabPanel header="Inquilinos" [selected]="true">           
+<p-tabView>
+   <!--<p-tabPanel header="Inquilinos" [selected]="true">           
         <p-table #dt [columns]="cols" [value]="inquilinos" selectionMode="single" [(selection)]="selectedInquilino" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
         <ng-template pTemplate="caption">      
                 
@@ -59,7 +59,7 @@
                     <label for="Tipo">Tipo</label>
                 </div>
                             <div class="ui-g-8">
-                                    <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
+                                    <p-dropdown [options]="cidades" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" [showClear]="true"></p-dropdown>
                                     <p>Selected City: {{selectedCity ? selectedCity.name : 'none'}}</p>
                             </div>
             </div>       
@@ -121,4 +121,5 @@
     <p-tabPanel header="Cadastro" [disabled]="true">
         Cadastro de inquilinos
    </p-tabPanel>
+   --> 
 </p-tabView>   

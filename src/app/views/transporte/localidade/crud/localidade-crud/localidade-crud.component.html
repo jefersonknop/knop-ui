@@ -5,7 +5,7 @@
     
 </div>
 
-<p-tabView (onChange)="onTabChange($event)">
+<p-tabView">
   <p-tabPanel header="Localidades" [selected]="true">   
   
        <p-table #dt [columns]="cols" [value]="localidades" selectionMode="single" [(selection)]="selectedLocalidade" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="15">
