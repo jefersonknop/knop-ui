@@ -4,6 +4,8 @@ import { CurrentUser } from 'src/app/entities/current-user';
 import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario-service';
+import { Email } from 'src/app/entities/email';
+import { EmailService } from 'src/app/services/email-service';
 
 
 
@@ -20,9 +22,12 @@ export class LoginComponent implements OnInit {
   message: string;
   aguardar: boolean = false;
 
+  email: Email;
+
 
   constructor(
     private usuarioService: UsuarioService,
+    private emailService: EmailService,
     private router: Router
   ) {
     
@@ -67,6 +72,18 @@ export class LoginComponent implements OnInit {
       window.location.reload();
   }
 
+
+  sendEmail(){
+    this.email = new Email();
+    this.email.titulo = 'teste';
+    this.email.texto = 'teste';
+    this.email.destinatario = this.usuario.email;    
+    this.email.remetente = 'jefersonknop@gmail.com';
+    this.emailService.sendMail
+
+    window.location.href = '/login';
+    window.location.reload();
+}
 
 
  

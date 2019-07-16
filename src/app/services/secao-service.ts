@@ -21,7 +21,7 @@ export class SecaoService {
     }
 
     createOrUpdate(secao: Secao) {
-       secao.inquilino_id = SharedService.getInstance().usuario.inquilino_id; 
+       secao.inquilino_id = SharedService.getInstance().usuario.inquilino_id.id; 
         if (secao.id != null){
           return this.http.put(this.baseUrl, secao);
         }

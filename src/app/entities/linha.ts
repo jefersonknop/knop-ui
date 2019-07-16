@@ -9,7 +9,7 @@ export class Linha{
     outros_valores: number;
     nr_registro: string;
     informacoes: string;   
-    inquilino_id: Inquilino;
+    inquilino_id: number;
 
 
 }

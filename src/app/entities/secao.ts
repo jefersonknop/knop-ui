@@ -14,7 +14,7 @@ export class Secao{
     tarifa: number;
     outros_valores: number;   
     informacoes: string;     
-    inquilino_id: Inquilino;
+    inquilino_id: number;
 
 
 

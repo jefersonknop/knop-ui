@@ -9,7 +9,7 @@ export class Localidade{
     latitude: string;
     longitude: string;   
     informacoes: string;   
-    inquilino_id: Inquilino;
+    inquilino_id: number;
 
 
   

@@ -163,9 +163,12 @@ body {
         padding: 15px 10px;
     }
 
-    .sidebar-collapse .nav > li > a:hover,
-    .sidebar-collapse .nav > li > a:focus {
+    .sidebar-collapse .nav > li > a:hover{
         background: #0A0A0A;
+        outline: 0;
+    }
+    .sidebar-collapse .nav > li > a:focus {
+        background: #00CA79;
         outline: 0;
     }
 

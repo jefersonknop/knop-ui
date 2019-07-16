@@ -22,7 +22,7 @@ export class LinhaService {
     }
     
     createOrUpdate(linha: Linha) {
-       linha.inquilino_id = SharedService.getInstance().usuario.inquilino_id; 
+       linha.inquilino_id = SharedService.getInstance().usuario.inquilino_id.id; 
         if (linha.id != null){
           return this.http.put(this.baseUrl, linha);
         }

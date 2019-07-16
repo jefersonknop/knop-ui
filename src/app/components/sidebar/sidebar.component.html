@@ -2,24 +2,19 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li>
-                <div class="user-img-div">
-                    <img src="assets/img/user.png" class="img-thumbnail" />
-
-                    <div class="inner-text">
-                       {{shared.usuario.nome}}
-                      
-                    
-                    <br />
-                        <small>{{shared.usuario.inquilino_id.nome}}</small>
-                    </div>
+                
+                <div class="user-img-div"  style="color:#E8E8E8">                     
+                     <small>Conta:</small> {{shared.usuario.inquilino_id.nome}}
+                     <br/> <br/>
+                    <img src="assets/img/user.png" class="img-thumbnail" /> {{shared.usuario.nome}}
                 </div>
 
             </li>
 
 
-            <li>
+           <!-- <li>
                 <a class="active-menu"  [routerLink]="['']"><i class="fa fa-dashboard "></i>Dashboard</a>
-            </li>
+            </li>-->
 
             <li>
                     <a href="#"><i class="fa fa-sitemap "></i>Transporte<span class="fa arrow"></span></a>
@@ -29,26 +24,15 @@
                             <a href="#">Passageiros<span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li>                                   
-                                    <a [routerLink]="['/bilhete-passagem']"><i class="fa fa-plus "></i>Passagens</a>
+                                    <a [routerLink]="['/bilhete-passagem']"><i class="fa fa-plus "></i>Passagem/Impressão</a>
                                 </li>
-                                <li>
-                                    <a [routerLink]="['/linhas']"><i class="fa fa-comments-o "></i>Linhas</a>                                
-                                </li>
-                                <li>
-                                     <a [routerLink]="['/localidades']"><i class="fa fa-bug"></i>Localidades/Bairros</a>
-                                    
-                                </li>
-                                <li>
-                                    <a [routerLink]="['/secoes']"><i class="fa fa-code"></i>Seções de linha</a>
-                                   
-                               </li>
-    
+                               
                             </ul>
     
                         </li>
-                        <li>
+                      <!--  <li>
                                 <a href="#"><i class="fa fa-bicycle "></i>Cargas</a>
-                            </li>      
+                            </li>     --> 
                     </ul>
                 </li>
 
@@ -56,31 +40,25 @@
             <li>          
                 <a href="#"><i class="fa fa-desktop "></i>Cadastros<span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
-                    <li>
+                  <!--  <li>
                       <a [routerLink]="['/cidades']"><i class="fa fa-toggle-on "></i>Cidades</a>
                        
                     </li>
                     <li>
                         <a [routerLink]="['/estados']"><i class="fa fa-bell "></i>Estados</a>                      
+                    </li>-->
+                    <li>
+                        <a [routerLink]="['/linhas']"><i class="fa fa-circle-o "></i>Linhas</a>                                
                     </li>
-                     <li>
-                        <a href="progress.html"><i class="fa fa-circle-o "></i>Progressbars</a>
+                    <li>
+                         <a [routerLink]="['/localidades']"><i class="fa fa-bug"></i>Localidades/Bairros</a>
+                        
                     </li>
-                     <li>
-                        <a href="buttons.html"><i class="fa fa-code "></i>Buttons</a>
-                    </li>
-                     <li>
-                        <a href="icons.html"><i class="fa fa-bug "></i>Icons</a>
-                    </li>
-                     <li>
-                        <a href="wizard.html"><i class="fa fa-bug "></i>Wizard</a>
-                    </li>
-                     <li>
-                        <a href="typography.html"><i class="fa fa-edit "></i>Typography</a>
-                    </li>
-                     <li>
-                        <a href="grid.html"><i class="fa fa-eyedropper "></i>Grid</a>
-                    </li>
+                    <li>
+                        <a [routerLink]="['/secoes']"><i class="fa fa-code"></i>Seções/Tarifas</a>
+                       
+                   </li>
+
                     
                    
                 </ul>

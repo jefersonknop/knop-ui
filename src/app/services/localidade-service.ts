@@ -23,7 +23,7 @@ export class LocalidadeService {
 
     createOrUpdate(localidade: Localidade) {
      
-       localidade.inquilino_id = SharedService.getInstance().usuario.inquilino_id; 
+       localidade.inquilino_id = SharedService.getInstance().usuario.inquilino_id.id; 
         if (localidade.id != null){
           return this.http.put(this.baseUrl, localidade);
         }

@@ -58,7 +58,8 @@ export class LocalidadeCrudComponent implements OnInit {
     ];
 
 
-    this.cidadeService.list().subscribe(cidades => this.cidades = cidades);
+    
+    
   }
 
   showDialogToAdd() {
