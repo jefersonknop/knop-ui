@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private emailService: EmailService,
+  //  private emailService: EmailService,
     private router: Router
   ) {
     
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
 
 
   sendEmail(){
-    this.email = new Email();
+   /* this.email = new Email();
     this.email.titulo = 'teste';
     this.email.texto = 'teste';
     this.email.destinatario = this.usuario.email;    
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
     this.emailService.sendMail
 
     window.location.href = '/login';
-    window.location.reload();
+    window.location.reload();**/
 }
 
 

@@ -3,7 +3,7 @@
         <ul class="nav" id="main-menu">
             <li>
                 
-                <div class="user-img-div"  style="color:#E8E8E8">                     
+                <div class="user-img-div"  style="color:#E8E8E8" *ngIf="shared.usuario">                     
                      <small>Conta:</small> {{shared.usuario.inquilino_id.nome}}
                      <br/> <br/>
                     <img src="assets/img/user.png" class="img-thumbnail" /> {{shared.usuario.nome}}

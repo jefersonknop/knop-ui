@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
 
   constructor(  
   ) {
-     
+   
       this.shared = SharedService.getInstance();
 
     
