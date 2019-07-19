@@ -34,6 +34,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 
@@ -170,7 +171,8 @@ import { SecaoCrudComponent } from './views/transporte/secao/crud/secao-crud/sec
     KeyFilterModule,
     InputMaskModule,
     CurrencyMaskModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CheckboxModule
  
   ],
 

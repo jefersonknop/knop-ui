@@ -55,7 +55,7 @@
             </ng-template>
         </p-table>
 
-        <p-dialog header="Secao" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+        <p-dialog header="Seção" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
 
             <div class="ui-g ui-fluid" *ngIf="secao">
 
@@ -124,6 +124,13 @@
                     <div class="ui-g-12">
                         <label for="informacoes">Informações</label>
                         <input pInputText id="informacoes" [(ngModel)]="secao.informacoes" />
+                    </div>
+                </div>
+
+                <div class="ui-g-12" *ngIf="newSecao" >
+                    <div class="ui-g-12">                        
+                        <p-checkbox [(ngModel)]="secao_inversa" binary="true"></p-checkbox>
+                        <label for="secao_inversa">Cadastrar secão inversa</label>
                     </div>
                 </div>
 

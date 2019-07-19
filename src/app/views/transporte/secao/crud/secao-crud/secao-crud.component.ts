@@ -17,9 +17,9 @@ import { LocalidadeListComponent } from '../../../localidade/crud/localidade-lis
 
 })
 export class SecaoCrudComponent implements OnInit {
-  linha: Linha; 
+  linha: Linha;
   selectedLinha: Linha;
-  linhas: Linha[];                     
+  linhas: Linha[];
 
 
   displayDialog: boolean;
@@ -29,24 +29,26 @@ export class SecaoCrudComponent implements OnInit {
   secoes: Secao[];
   cols: any[];
 
+  secao_inversa: boolean = true;
+
   //str_tarifa: string;
 
 
 
 
   constructor(private secaoService: SecaoService, private linhaService: LinhaService, public dialogService: DialogService) {
-   }
+  }
 
   ngOnInit() {
-   
-   
+
+
     this.secaoService.list().subscribe(secoes => this.secoes = secoes);
     this.cols = [
       { field: 'linha_id.nome', header: 'Linha' },
       { field: 'localidade1_id.nome', header: 'Destino' },
       { field: 'localidade2_id.nome', header: 'Origem' },
       { field: 'tarifa', header: 'Tarifa (R$)' }
-      
+
     ];
 
 
@@ -54,69 +56,115 @@ export class SecaoCrudComponent implements OnInit {
   }
 
   showDialogToAdd() {
-    this.newSecao = true;  
-    this.secao = new Secao();    
+    this.newSecao = true;
+    this.secao = new Secao();
     this.secao.linha_id = new Linha();
     this.secao.localidade1_id = new Localidade();
     this.secao.localidade2_id = new Localidade();
-    this.secao.descricao =" ";
-    this.secao.tipo ="";
+    this.secao.descricao = " ";
+    this.secao.tipo = "";
     this.secao.principal = false;
     this.secao.tarifa = 0.0;
     this.secao.outros_valores = 0.0;
-    this.secao.informacoes ="";
+    this.secao.informacoes = "";
 
     //this.str_tarifa = "0,00";
-    
+
     this.displayDialog = true;
   }
 
   save() {
-     if (this.secao.linha_id==null || this.secao.linha_id.nome== null ){
-       alert("Informar linha");
-       return;
-     }
-     else if (this.secao.localidade1_id ==null || this.secao.localidade1_id.nome == null){
-       alert("Informar localidade de origem");
-       return;      
-     } 
-     else if (this.secao.localidade2_id ==null || this.secao.localidade2_id.nome == null){
+    if (this.secao.linha_id == null || this.secao.linha_id.nome == null) {
+      alert("Informar linha");
+      return;
+    }
+    else if (this.secao.localidade1_id == null || this.secao.localidade1_id.nome == null) {
+      alert("Informar localidade de origem");
+      return;
+    }
+    else if (this.secao.localidade2_id == null || this.secao.localidade2_id.nome == null) {
       alert("Informar localidade de destino");
-      return;      
-    } 
+      return;
+    }
 
 
 
-     this.secao.descricao =this.secao.localidade1_id.nome + " - " + this.secao.localidade2_id.nome;
+    this.secao.descricao = this.secao.localidade1_id.nome + " - " + this.secao.localidade2_id.nome;
 
     // try{       
-        //this.secao.tarifa = parseFloat(this.str_tarifa.replace(",", "."));
+    //this.secao.tarifa = parseFloat(this.str_tarifa.replace(",", "."));
     // }
     //catch(Error){
-     //   alert(Error.message);
-      //  return;    
+    //   alert(Error.message);
+    //  return;    
     //}
-     
-   
-    
+
+
+
     let secoes = [...this.secoes];
-  
-    if (this.newSecao){
+
+    if (this.newSecao) {
       secoes.push(this.secao);
-       /*CHAMA O SERVIÇO PARA ADICIONAR UMA NOVo secao */
+      /*CHAMA O SERVIÇO PARA ADICIONAR UMA NOVo secao */
       // this.secao.inquilino_id = SharedService.getInstance().usuario.inquilino_id; 
 
 
 
-       this.secaoService.createOrUpdate(this.secao).subscribe(response => {
+      this.secaoService.createOrUpdate(this.secao).subscribe(response => {
 
         let res: Response = <Response>response;
 
         if (res.codigo == 1) {
-          //alert(res.mensagem);
-          this.secao = new Secao();
+          if (!this.secao_inversa){
+             this.secao = new Secao();
+          }
         }
-        else {         
+        else {
+          alert(res.mensagem);
+        }
+      },
+        (erro) => {
+          alert(erro);
+      });
+
+
+     //Cadastrar a secao inversa se definido
+     if (this.secao_inversa){
+         let secao2 = this.cloneLocalidade(this.secao);
+         secao2.localidade1_id = this.secao.localidade2_id;
+         secao2.localidade2_id = this.secao.localidade1_id;
+
+
+        secoes.push(secao2);
+        this.secaoService.createOrUpdate(secao2).subscribe(response => {
+
+          let res: Response = <Response>response;
+
+          if (res.codigo == 1) {           
+               this.secao = new Secao();            
+          }
+          else {
+            alert(res.mensagem);
+          }
+        },
+          (erro) => {
+            alert(erro);
+        });
+
+     }
+
+
+    }
+    else {
+      secoes[this.secoes.indexOf(this.selectedSecao)] = this.secao;
+      this.secaoService.createOrUpdate(this.secao).subscribe(response => {
+        let res: Response = <Response>response;
+
+        if (res.codigo == 1) {
+          // alert(res.mensagem);
+          // this.router.navigate(['/consulta-pessoa']);
+        }
+        else {
           alert(res.mensagem);
         }
       },
@@ -125,51 +173,33 @@ export class SecaoCrudComponent implements OnInit {
         });
 
     }
-    else{
-      secoes[this.secoes.indexOf(this.selectedSecao)] = this.secao;
-      this.secaoService.createOrUpdate(this.secao).subscribe(response => {
-        let res: Response = <Response>response;
+    this.secoes = secoes;
+    this.secao = null;
+    // this.str_tarifa = "";
+    this.displayDialog = false;
+  }
 
+  delete() {
+    let index = this.secoes.indexOf(this.selectedSecao);
+
+    if (confirm("Deseja realmente excluir esse registro?")) {
+      this.secaoService.delete(this.selectedSecao.id).subscribe(response => {
+        let res: Response = <Response>response;
         if (res.codigo == 1) {
-         // alert(res.mensagem);
-         // this.router.navigate(['/consulta-pessoa']);
+          alert(res.mensagem);
+          this.secoes.splice(index, 1);
         }
         else {
           alert(res.mensagem);
         }
       },
-        (erro) => {                           
+        (erro) => {
           alert(erro);
         });
-       
-    }
-    this.secoes = secoes;
-    this.secao = null;
-   // this.str_tarifa = "";
-    this.displayDialog = false;
-  }
-
-  delete() {
-    let index = this.secoes.indexOf(this.selectedSecao);  
-    
-    if(confirm("Deseja realmente excluir esse registro?")){
-      this.secaoService.delete(this.selectedSecao.id).subscribe(response => {
-            let res:Response = <Response>response;
-            if(res.codigo == 1){
-              alert(res.mensagem);
-              this.secoes.splice(index,1);
-            }
-            else{             
-              alert(res.mensagem);
-            }
-        },
-        (erro) => {  
-             alert(erro);
-        });        
     }
     this.secoes = this.secoes.filter((val, i) => i != index);
     this.secao = null;
-   // this.str_tarifa = "";
+    // this.str_tarifa = "";
     this.displayDialog = false;
   }
 
@@ -192,47 +222,47 @@ export class SecaoCrudComponent implements OnInit {
 
   showLinha() {
     const ref = this.dialogService.open(LinhaListComponent, {
-        header: 'Escolha uma linha',
-        width: '70%',
+      header: 'Escolha uma linha',
+      width: '70%',
       //contentStyle: {"max-height": "350px", "overflow": "auto"}
-       contentStyle: {"overflow": "auto"}
+      contentStyle: { "overflow": "auto" }
     });
 
-    ref.onClose.subscribe((linha: Linha) =>{
-        if (linha) {
-             this.secao.linha_id = linha;
-        }
+    ref.onClose.subscribe((linha: Linha) => {
+      if (linha) {
+        this.secao.linha_id = linha;
+      }
     });
   }
 
   showLocalidade1() {
     const ref = this.dialogService.open(LocalidadeListComponent, {
-        header: 'Escolha a localideade de origem',
-        width: '70%',
+      header: 'Escolha a localideade de origem',
+      width: '70%',
       //contentStyle: {"max-height": "350px", "overflow": "auto"}
-       contentStyle: {"overflow": "auto"}
+      contentStyle: { "overflow": "auto" }
     });
 
-    ref.onClose.subscribe((localidade: Localidade) =>{
-        if (localidade) {
-             this.secao.localidade1_id = localidade;
-        }
+    ref.onClose.subscribe((localidade: Localidade) => {
+      if (localidade) {
+        this.secao.localidade1_id = localidade;
+      }
     });
   }
 
 
   showLocalidade2() {
     const ref = this.dialogService.open(LocalidadeListComponent, {
-        header: 'Escolha a localideade de destino',
-        width: '70%',
+      header: 'Escolha a localideade de destino',
+      width: '70%',
       //contentStyle: {"max-height": "350px", "overflow": "auto"}
-       contentStyle: {"overflow": "auto"}
+      contentStyle: { "overflow": "auto" }
     });
 
-    ref.onClose.subscribe((localidade: Localidade) =>{
-        if (localidade) {
-             this.secao.localidade2_id = localidade;
-        }
+    ref.onClose.subscribe((localidade: Localidade) => {
+      if (localidade) {
+        this.secao.localidade2_id = localidade;
+      }
     });
   }
 
