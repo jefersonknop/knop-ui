@@ -1,0 +1,12 @@
+Tecnico
+- Alterar cidade da localidade cadastrou nova cidade
+  * parece que o problema é quando esta em cache 
+
+- Ordenar pesquisar por ordem alfabética (backend)
+
+
+
+Usabilidade
+- Manter tela de cadastro
+- Guardar informações ultimo cadastro de localidade
+- Foco na busca

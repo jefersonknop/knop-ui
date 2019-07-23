@@ -45,8 +45,8 @@ export class SecaoCrudComponent implements OnInit {
     this.secaoService.list().subscribe(secoes => this.secoes = secoes);
     this.cols = [
       { field: 'linha_id.nome', header: 'Linha' },
-      { field: 'localidade1_id.nome', header: 'Destino' },
-      { field: 'localidade2_id.nome', header: 'Origem' },
+      { field: 'localidade1_id.nome', header: 'Origem' },
+      { field: 'localidade2_id.nome', header: 'Destino' },
       { field: 'tarifa', header: 'Tarifa (R$)' }
 
     ];
@@ -58,7 +58,7 @@ export class SecaoCrudComponent implements OnInit {
   showDialogToAdd() {
     this.newSecao = true;
     this.secao = new Secao();
-    this.secao.linha_id = new Linha();
+    this.secao.linha_id = new Linha();   
     this.secao.localidade1_id = new Localidade();
     this.secao.localidade2_id = new Localidade();
     this.secao.descricao = " ";
@@ -114,12 +114,7 @@ export class SecaoCrudComponent implements OnInit {
 
         let res: Response = <Response>response;
 
-        if (res.codigo == 1) {
-          if (!this.secao_inversa){
-             this.secao = new Secao();
-          }
-        }
-        else {
+        if (res.codigo != 1) {
           alert(res.mensagem);
         }
       },
@@ -130,7 +125,7 @@ export class SecaoCrudComponent implements OnInit {
 
      //Cadastrar a secao inversa se definido
      if (this.secao_inversa){
-         let secao2 = this.cloneLocalidade(this.secao);
+         let secao2 = this.cloneSecao(this.secao);
          secao2.localidade1_id = this.secao.localidade2_id;
          secao2.localidade2_id = this.secao.localidade1_id;
 
@@ -140,10 +135,7 @@ export class SecaoCrudComponent implements OnInit {
 
           let res: Response = <Response>response;
 
-          if (res.codigo == 1) {           
-               this.secao = new Secao();            
-          }
-          else {
+          if (res.codigo != 1) {     
             alert(res.mensagem);
           }
         },
@@ -153,8 +145,19 @@ export class SecaoCrudComponent implements OnInit {
 
      }
 
+     
+      
+      //prepara novo cadastro
+      this.newSecao = true;
+      this.secao = this.cloneSecao(this.secao);
+      this.secao.localidade1_id = new Localidade();
+      this.secao.localidade2_id = new Localidade();
+      this.secao.principal = false;
+      this.secao.tarifa = 0.0;
 
-    }
+     
+
+    }//update
     else {
       secoes[this.secoes.indexOf(this.selectedSecao)] = this.secao;
       this.secaoService.createOrUpdate(this.secao).subscribe(response => {
@@ -172,11 +175,15 @@ export class SecaoCrudComponent implements OnInit {
           alert(erro);
         });
 
+      this.secao = null;    
+      this.displayDialog = false;
     }
     this.secoes = secoes;
-    this.secao = null;
-    // this.str_tarifa = "";
-    this.displayDialog = false;
+    
+    
+   
+
+
   }
 
   delete() {
@@ -186,8 +193,9 @@ export class SecaoCrudComponent implements OnInit {
       this.secaoService.delete(this.selectedSecao.id).subscribe(response => {
         let res: Response = <Response>response;
         if (res.codigo == 1) {
-          alert(res.mensagem);
           this.secoes.splice(index, 1);
+          alert(res.mensagem);
+         
         }
         else {
           alert(res.mensagem);
@@ -197,7 +205,7 @@ export class SecaoCrudComponent implements OnInit {
           alert(erro);
         });
     }
-    this.secoes = this.secoes.filter((val, i) => i != index);
+  //  this.secoes = this.secoes.filter((val, i) => i != index);
     this.secao = null;
     // this.str_tarifa = "";
     this.displayDialog = false;
@@ -206,11 +214,11 @@ export class SecaoCrudComponent implements OnInit {
 
   onRowSelect(event) {
     this.newSecao = false;
-    this.secao = this.cloneLocalidade(event.data);
+    this.secao = this.cloneSecao(event.data);
     this.displayDialog = true;
   }
 
-  cloneLocalidade(e: Secao): Secao {
+  cloneSecao(e: Secao): Secao {
     let secao = new Secao();
     for (let prop in e) {
       secao[prop] = e[prop];
