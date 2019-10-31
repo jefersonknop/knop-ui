@@ -1,12 +1,15 @@
 import { Inquilino } from '../entities/inquilino';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config-service';
 
 
 @Injectable()
 export class InquilinoService {
+  baseUrl: string = ConfigService.url_Knop_api+ '/iquilinos';
+
   constructor(private http: HttpClient) { }
-    baseUrl: string = 'https://knop-api.herokuapp.com/inquilinos';
+
 
     list() {
       return this.http.get<Inquilino[]>(this.baseUrl);

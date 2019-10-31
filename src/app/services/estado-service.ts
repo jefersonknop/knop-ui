@@ -1,13 +1,15 @@
 import { Estado } from '../entities/estado';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config-service';
 
 
 @Injectable()
 export class EstadoService {
+  baseUrl: string = ConfigService.url_Knop_api+ '/estados';
+
   constructor(private http: HttpClient) { }
- // baseUrl: string = 'http://localhost:8080/estados';
-   baseUrl: string = 'https://knop-api.herokuapp.com/estados';
+
 
   list() {
     return this.http.get<Estado[]>(this.baseUrl);

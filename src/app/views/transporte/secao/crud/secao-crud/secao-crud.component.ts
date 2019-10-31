@@ -42,11 +42,12 @@ export class SecaoCrudComponent implements OnInit {
   ngOnInit() {
 
 
-    this.secaoService.list().subscribe(secoes => this.secoes = secoes);
+   
+    this.secaoService.list().subscribe(secoes => this.secoes = secoes); 
+
     this.cols = [
       { field: 'linha_id.nome', header: 'Linha' },
-      { field: 'localidade1_id.nome', header: 'Origem' },
-      { field: 'localidade2_id.nome', header: 'Destino' },
+      { field: 'descricao', header: 'Origem - Destino' },    
       { field: 'tarifa', header: 'Tarifa (R$)' }
 
     ];
@@ -128,6 +129,7 @@ export class SecaoCrudComponent implements OnInit {
          let secao2 = this.cloneSecao(this.secao);
          secao2.localidade1_id = this.secao.localidade2_id;
          secao2.localidade2_id = this.secao.localidade1_id;
+         secao2.descricao = this.secao.localidade1_id.nome + " - " + this.secao.localidade2_id.nome;
 
 
         secoes.push(secao2);
@@ -150,7 +152,7 @@ export class SecaoCrudComponent implements OnInit {
       //prepara novo cadastro
       this.newSecao = true;
       this.secao = this.cloneSecao(this.secao);
-      this.secao.localidade1_id = new Localidade();
+     // this.secao.localidade1_id = new Localidade();
       this.secao.localidade2_id = new Localidade();
       this.secao.principal = false;
       this.secao.tarifa = 0.0;

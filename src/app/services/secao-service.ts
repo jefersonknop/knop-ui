@@ -2,16 +2,22 @@ import { Secao } from '../entities/secao';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SharedService } from './shared.service';
+import { ConfigService } from './config-service';
 
 
 @Injectable()
 export class SecaoService {
+  baseUrl: string = ConfigService.url_Knop_api+ '/secoes';
+
   constructor(private http: HttpClient) { }
-    baseUrl: string = 'https://knop-api.herokuapp.com/secoes';
-   // baseUrl: string = 'http://localhost:8080/secoes';
+   
+
+   ngOnInit() {
+    //this.http.get<Secao[]>(this.baseUrl + '/inquilino/' +  SharedService.getInstance().usuario.inquilino_id.id).subscribe(secoes => this.secoes = secoes);    
+   }
 
 
-    list() {
+    list() {     
       return this.http.get<Secao[]>(this.baseUrl + '/inquilino/' +  SharedService.getInstance().usuario.inquilino_id.id);
     
     }

@@ -17,9 +17,10 @@ export class SecaoListComponent implements OnInit {
   ngOnInit() {
  
       this.secaoService.list().subscribe(secoes => this.secoes = secoes); 
+
       this.cols = [
         { field: 'linha_id.nome', header: 'Linha' },
-        { field: 'localidade1_id.nome', header: 'Destino' },
+        { field: 'descricao', header: 'Origem - Destino' },   
         { field: 'localidade2_id.nome', header: 'Origem' },
         { field: 'tarifa', header: 'Tarifa (R$)' }
         

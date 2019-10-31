@@ -103,6 +103,11 @@ export class LocalidadeCrudComponent implements OnInit {
         if (res.codigo == 1) {
           //alert(res.mensagem);
           this.localidade = new Localidade();
+           //prepara novo cadastro
+          this.newLocalidade = true;
+          this.localidade = this.cloneLocalidade(this.localidade);
+          this.localidade.nome ="";
+
         }
         else {         
           alert(res.mensagem);
@@ -111,6 +116,10 @@ export class LocalidadeCrudComponent implements OnInit {
         (erro) => {
           alert(erro);
         });
+
+
+        this.newLocalidade = true;
+        this.displayDialog = true;
 
     }
     else{
@@ -129,11 +138,11 @@ export class LocalidadeCrudComponent implements OnInit {
         (erro) => {                           
           alert(erro);
         });
-       
+      this.localidade = null;
+      this.displayDialog = false;
     }
     this.localidades = localidades;
-    this.localidade = null;
-    this.displayDialog = false;
+  
   }
 
   delete() {
@@ -154,7 +163,7 @@ export class LocalidadeCrudComponent implements OnInit {
              alert(erro);
         });        
     }
-    this.localidades = this.localidades.filter((val, i) => i != index);
+   // this.localidades = this.localidades.filter((val, i) => i != index);
     this.localidade = null;
     this.displayDialog = false;
   }

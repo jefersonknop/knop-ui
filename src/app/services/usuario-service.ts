@@ -1,16 +1,15 @@
 import { Usuario } from '../entities/usuario';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config-service';
 
 
 @Injectable()
 export class UsuarioService {
+  baseUrl: string = ConfigService.url_Knop_api+ '/usuarios';
+  urlAuth: string = ConfigService.url_Knop_api+ '/api/auth';
+
   constructor(private http: HttpClient) { }
-  //baseUrl: string = 'http://localhost:8080/usuarios';
- // urlAuth: string = 'http://localhost:8080/api/auth';
- 
-  baseUrl: string = 'https://knop-api.herokuapp.com//usuarios';
-  urlAuth: string = 'https://knop-api.herokuapp.com/api/auth';
 
 
   login(usuario: Usuario){

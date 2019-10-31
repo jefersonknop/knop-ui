@@ -1,17 +1,22 @@
 import { Cidade } from '../entities/cidade';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config-service';
 
 
 @Injectable()
 export class CidadeService {
+  baseUrl: string = ConfigService.url_Knop_api+ '/cidades';
+
   constructor(private http: HttpClient) { }
-    baseUrl: string = 'https://knop-api.herokuapp.com/cidades';
-  //  baseUrl: string = 'http://localhost:8080/cidades';
+  
 
 
     list() {
-      return this.http.get<Cidade[]>(this.baseUrl);
+   
+   //  this.http.get<Cidade[]>(this.baseUrl).subscribe(cidades => this.cidades = cidades);    
+   //  return this.cidades;
+       return this.http.get<Cidade[]>(this.baseUrl);
     }
 
     getById(id: number) {

@@ -1,3 +1,4 @@
+import { ConfigService } from './config-service';
 import { Linha } from '../entities/linha';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -6,9 +7,14 @@ import { SharedService } from './shared.service';
 
 @Injectable()
 export class LinhaService {
-  constructor(private http: HttpClient) { }
-    baseUrl: string = 'https://knop-api.herokuapp.com/linhas';
-   // baseUrl: string = 'http://localhost:8080/linhas';
+  baseUrl: string = ConfigService.url_Knop_api+ '/linhas';
+
+  constructor(private http: HttpClient) {
+    
+   }
+
+
+   
 
 
     list() {

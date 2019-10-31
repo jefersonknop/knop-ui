@@ -2,13 +2,15 @@ import { Localidade } from '../entities/localidade';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SharedService } from './shared.service';
+import { ConfigService } from './config-service';
 
 
 @Injectable()
 export class LocalidadeService {
+  baseUrl: string = ConfigService.url_Knop_api+ '/localidades';
+
   constructor(private http: HttpClient) { }
-    baseUrl: string = 'https://knop-api.herokuapp.com/localidades';
-    //baseUrl: string = 'http://localhost:8080/localidades';
+  
 
 
     list() {

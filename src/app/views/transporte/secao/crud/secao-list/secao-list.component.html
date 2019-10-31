@@ -12,8 +12,7 @@
 <ng-template pTemplate="header">
    <tr>
        <th pSortableColumn="linha">Linha <p-sortIcon field="linha_id.nome"></p-sortIcon></th>
-       <th pSortableColumn="localidade1">Origem<p-sortIcon field="localidade1_id_nome"></p-sortIcon></th>           
-       <th pSortableColumn="localidade2">Destino<p-sortIcon field="localidade2_id_nome"></p-sortIcon></th>            
+       <th pSortableColumn="descricao">Origem - Destino<p-sortIcon field="localidade1_id_nome"></p-sortIcon></th>  
        <th pSortableColumn="tarifa">Tarifa<p-sortIcon field="tarifa"></p-sortIcon></th>           
        <th style="width:4em"></th>
    </tr>
@@ -21,8 +20,9 @@
 <ng-template pTemplate="body" let-secao>
    <tr>
        <td><span class="ui-column-title">Linha</span>{{secao.linha_id.nome}}</td>
-       <td><span class="ui-column-title">Origem</span>{{secao.localidade1_id.nome}}</td>
-       <td><span class="ui-column-title">Destino</span>{{secao.localidade2_id.nome}}</td>
+       <td><span class="ui-column-title">Linha</span>{{secao.descricao}}</td>
+      <!--<td><span class="ui-column-title">Origem</span>{{secao.localidade1_id.nome}}</td>
+       <td><span class="ui-column-title">Destino</span>{{secao.localidade2_id.nome}}</td>--> 
        <td><span class="ui-column-title">Tarifa</span>{{secao.tarifa.toFixed(2)}}</td>
      
        <td>
