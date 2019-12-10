@@ -88,6 +88,7 @@ import { LocalidadeListComponent } from './views/transporte/localidade/crud/loca
 
 import { SecaoListComponent } from './views/transporte/secao/crud/secao-list/secao-list.component';
 import { SecaoCrudComponent } from './views/transporte/secao/crud/secao-crud/secao-crud.component';
+import { UnidadeMedidaCrudComponent } from './src/app/modulo-estoque/views/unidade-medida/unidade-medida-crud/unidade-medida-crud.component';
 
 
 
@@ -117,7 +118,8 @@ import { SecaoCrudComponent } from './views/transporte/secao/crud/secao-crud/sec
     LinhaListComponent,
     LocalidadeListComponent,
     SecaoCrudComponent,
-    SecaoListComponent
+    SecaoListComponent,
+    UnidadeMedidaCrudComponent
     
  
    

@@ -8,7 +8,7 @@ import { Unidade_medida } from '../entities/unidade-medida';
 
 
 @Injectable()
-export class LinhaService {
+export class Unidade_medidaService {
   baseUrl: string = ConfigService.url_Kestoque_api+ '/unidades_medida';
 
   constructor(private http: HttpClient) {
