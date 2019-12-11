@@ -16,6 +16,7 @@ import { TransportePassageirosComponent } from './app/views/transporte/transport
 import { LocalidadeCrudComponent } from './app/views/transporte/localidade/crud/localidade-crud/localidade-crud.component';
 import { SecaoCrudComponent } from './app/views/transporte/secao/crud/secao-crud/secao-crud.component';
 import { BilhetePassagemComponent } from './app/views/transporte/transporte-passageiros/bilhete-passagem/bilhete-passagem.component';
+import { UnidadeMedidaCrudComponent } from './app/modulo-estoque/views/unidade-medida/unidade-medida-crud/unidade-medida-crud.component';
 
  
 const appRoutes: Routes = [
@@ -28,7 +29,10 @@ const appRoutes: Routes = [
     { path: 'inquilinos',                component: InquilinoCrudComponent,  canActivate: [AuthGuard] },
     { path: 'linhas',                    component: LinhaCrudComponent,  canActivate: [AuthGuard] },
     { path: 'localidades',               component: LocalidadeCrudComponent,  canActivate: [AuthGuard] },
-    { path: 'secoes',                    component: SecaoCrudComponent,  canActivate: [AuthGuard] }
+    { path: 'secoes',                    component: SecaoCrudComponent,  canActivate: [AuthGuard] },
+    //modulo_estoque
+    { path: 'unidades_medida',            component: UnidadeMedidaCrudComponent,  canActivate: [AuthGuard] }
+
 
 
 

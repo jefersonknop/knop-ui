@@ -37,7 +37,8 @@ export class UnidadeMedidaCrudComponent implements OnInit {
     let unidade_medidas = [...this.unidade_medidas];
     if (this.newUnidade_medida){
       unidade_medidas.push(this.unidade_medida);
-       /*CHAMA O SERVIÇO PARA ADICIONAR UMA NOVo unidade_medida */
+       /*CHAMA O SERVIÇO PARA ADICIONAR UMA NOVA unidade_medida */
+       this.unidade_medida.ativo = true;
        this.estadoService.createOrUpdate(this.unidade_medida).subscribe(response => {
 
         let res: Response = <Response>response;

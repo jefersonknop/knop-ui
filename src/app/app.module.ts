@@ -88,7 +88,9 @@ import { LocalidadeListComponent } from './views/transporte/localidade/crud/loca
 
 import { SecaoListComponent } from './views/transporte/secao/crud/secao-list/secao-list.component';
 import { SecaoCrudComponent } from './views/transporte/secao/crud/secao-crud/secao-crud.component';
-import { UnidadeMedidaCrudComponent } from './src/app/modulo-estoque/views/unidade-medida/unidade-medida-crud/unidade-medida-crud.component';
+import { UnidadeMedidaCrudComponent } from './modulo-estoque/views/unidade-medida/unidade-medida-crud/unidade-medida-crud.component';
+import { Unidade_medidaService } from './modulo-estoque/services/unidade-medida-service';
+
 
 
 
@@ -191,6 +193,9 @@ import { UnidadeMedidaCrudComponent } from './src/app/modulo-estoque/views/unida
               LinhaService,
               LocalidadeService,
               SecaoService,
+
+              Unidade_medidaService,
+              
               SharedService,
              {
                  provide: HTTP_INTERCEPTORS,
